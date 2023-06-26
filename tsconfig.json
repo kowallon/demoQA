@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "https://demoqa.com/books",
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "cypress-xpath"],
+    "allowJs": true,
+    "noEmit": true
+  },
+  "include": [
+    "cypress/**/*.ts",
+    "cypress/support/commands.ts"
+  ]
+}
