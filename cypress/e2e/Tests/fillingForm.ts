@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import { common } from "../../PageObjects/Common"
+import { formsPage } from "../../PageObjects/FormsPage"
 import { profilePage } from "../../PageObjects/ProfilePage"
 import { singleBookPage } from "../../PageObjects/SingleBookPage"
 import { storePage } from "../../PageObjects/StorePage"
@@ -18,13 +19,9 @@ describe('Submitting form', () => {
     })
 
     it("Fill and submit form", ()=>{
-        storePage
-        .selectAnyBook()
-        singleBookPage
-        .addBookToCollection()
-        profilePage
-        .removeBooksOneByOne()
-        .elementIsNotDisplayed(profilePage.deleteSVG)
+        formsPage
+        .fillForm()
+        .checkIfElementIsDisplayed(formsPage.confirmationModal)
     })
 
      

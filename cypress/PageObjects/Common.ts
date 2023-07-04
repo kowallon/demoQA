@@ -74,8 +74,6 @@ loginBtn : string = '#login'
         return this;
     }
 
-
-
 }
 
 export const common = new Common();
