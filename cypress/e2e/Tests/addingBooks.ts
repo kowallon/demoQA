@@ -56,5 +56,37 @@ describe('Adding and removing books', () => {
         .checkIfElementIsDisplayed(singleBookPage.WebsiteProp)
 
     })
+
+    it("Check if same book cannot be added twcie", ()=>{
+        profilePage
+        .visitProfile()
+        .clickElementWithText(profilePage.removeAllBooksBtnText)
+        .clickElementWithForce(profilePage.closeModalBtn)
+        storePage
+        .visitStorePage()
+        .clickElementWithText("Git Pocket Guide")
+        singleBookPage
+        .addBookToCollection()
+        storePage
+        .visitStorePage()
+        .clickElementWithText("Git Pocket Guide")
+        singleBookPage
+        .addBookToCollection()
+        .catchRequest('GET', 'https://demoqa.com/Account/v1/User/72d5216b-9df3-418f-92c0-46de16d69c76', 'Profile')
+        .visitProfile()
+        profilePage
+        .checkNumberOfBooks('Profile', 1)
+    })
      
+    it.only("Check if all books can be added", ()=>{
+        storePage
+        .catchRequest('GET', 'https://demoqa.com/BookStore/v1/Books', 'books')
+        .visitStorePage()
+        .addAllBooks('books')
+        .catchRequest('GET', 'https://demoqa.com/Account/v1/User/72d5216b-9df3-418f-92c0-46de16d69c76', 'Profile')
+        .visitProfile()
+        profilePage
+        .checkNumberOfBooks('Profile', 8)
+    })
+
 })

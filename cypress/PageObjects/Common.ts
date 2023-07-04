@@ -74,6 +74,20 @@ loginBtn : string = '#login'
         return this;
     }
 
+    clickElementWithText(text: string){
+        cy.contains(text).click()
+        return this;
+    }
+
+    checkIfElementWithTextIsDisabled(selector :string){
+        cy.contains(selector).should('be.disabled')
+        return this;
+    }
+
+    clickXPathElement(selector : string){
+        cy.xpath(selector).click()
+    }
+
 }
 
 export const common = new Common();

@@ -8,6 +8,8 @@ profileUrl : string = "https://demoqa.com/profile"
 deleteSVG : string = "#delete-record-undefined"
 booksTable : string = ".rt-table"
 firstBookTitle : string = "//div[@class='rt-table']//a"
+removeAllBooksBtnText : string = "Delete All Books"
+closeModalBtn : string = "#closeSmallModal-ok"
 
 //Methods
 
@@ -35,13 +37,11 @@ firstBookTitle : string = "//div[@class='rt-table']//a"
                     for(let i = 0; i < numberOfBooks; i ++){
                     cy.get(this.deleteSVG).click()
                     cy.wait(1000)
-                    cy.get('#closeSmallModal-ok').click({force: true})
+                    cy.get(this.closeModalBtn).click({force: true})
                     }
                 }
             })
         })
-
-        
         return this;
     }
 
@@ -49,6 +49,11 @@ firstBookTitle : string = "//div[@class='rt-table']//a"
         cy.get('@'+alias).then(title =>{
             cy.xpath(this.firstBookTitle).should('contain.text', title)
         })
+        return this;
+    }
+
+    checkNumberOfBooks(alias : string, numOfBooks : number){
+        cy.wait('@'+alias).its('response.body.books').should('have.length', numOfBooks)
         return this;
     }
 
