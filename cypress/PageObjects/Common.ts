@@ -59,6 +59,22 @@ loginBtn : string = '#login'
         return this;
     }
 
+    saveValueFromXpath(selector : string, alias: string){
+        cy.xpath(selector).invoke('text').as(alias)
+        return this;
+    }
+
+    checkIfElementIsDisplayed(selector : string){
+        cy.get(selector).should('be.visible')
+        return this;
+    }
+
+    checkIfElementIsOfCorrectType(selector :string, index : number, type :string){
+        cy.get(selector).eq(index).should("be.a", type)
+        return this;
+    }
+
+
 
 }
 

@@ -6,6 +6,8 @@ export class ProfilePage extends Common{
 //Selectors
 profileUrl : string = "https://demoqa.com/profile"
 deleteSVG : string = "#delete-record-undefined"
+booksTable : string = ".rt-table"
+firstBookTitle : string = "//div[@class='rt-table']//a"
 
 //Methods
 
@@ -40,6 +42,13 @@ deleteSVG : string = "#delete-record-undefined"
         })
 
         
+        return this;
+    }
+
+    checkIfBookTitleIsCorrect(alias : string){
+        cy.get('@'+alias).then(title =>{
+            cy.xpath(this.firstBookTitle).should('contain.text', title)
+        })
         return this;
     }
 

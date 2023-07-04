@@ -6,18 +6,18 @@ import { singleBookPage } from "../../PageObjects/SingleBookPage"
 import { storePage } from "../../PageObjects/StorePage"
 import { visits } from "../../PageObjects/Visits"
 
-describe('Adding and removing books', () => {
+describe('Submitting form', () => {
 
     beforeEach(() =>{
-        storePage
-        .visitStorePage()
-        .clickElementWithForce(common.loginBtn)
-        .catchRequest('POST', 'https://demoqa.com/Account/v1/Login', 'login')
-        .logIn() 
-        .waitForServiceResponse('login', 200)
+        visits
+        .visitFormsPage()
     })
 
-    it("Add any book to Collection", ()=>{
+    afterEach(() =>{
+        cy.clearSession()
+    })
+
+    it("Fill and submit form", ()=>{
         storePage
         .selectAnyBook()
         singleBookPage
@@ -26,5 +26,6 @@ describe('Adding and removing books', () => {
         .removeBooksOneByOne()
         .elementIsNotDisplayed(profilePage.deleteSVG)
     })
+
      
-    })
+})
