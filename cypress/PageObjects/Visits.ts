@@ -8,6 +8,11 @@ export class Visits extends StorePage{
         return this;
     }
 
+    visitLinksPage(){
+        cy.visit("https://demoqa.com/links")
+        return this;
+    }
+
 }
 
 export const visits = new Visits();

@@ -8,21 +8,23 @@ import { singleBookPage } from "../../PageObjects/SingleBookPage"
 import { storePage } from "../../PageObjects/StorePage"
 import { visits } from "../../PageObjects/Visits"
 
-describe('Submitting form', () => {
+describe('Checking request', () => {
 
     beforeEach(() =>{
-        linksPage
-        .visitFormsPage()
+        visits
+        .visitLinksPage()
     })
 
     afterEach(() =>{
         cy.clearSession()
     })
 
-    it("Fill and submit form", ()=>{
-        formsPage
-        .fillForm()
-        .checkIfElementIsDisplayed(formsPage.confirmationModal)
+    it("Verify request headers", ()=>{
+        linksPage
+        .catchRequest('GET', 'https://demoqa.com/created', 'created')
+        .clickElementWithForce(linksPage.createdBtn)
+        .verifyRequest('created', 201)
+        
     })
 
      
